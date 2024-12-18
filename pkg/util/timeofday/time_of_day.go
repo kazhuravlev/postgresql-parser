@@ -126,19 +126,19 @@ func (t TimeOfDay) Hour() int {
 	if t == Time2400 {
 		return 24
 	}
-	return int(t) % int(microsecondsPerDay) / int(microsecondsPerHour)
+	return int(int64(t) % microsecondsPerDay / microsecondsPerHour)
 }
 
 // Minute returns the minute offset within the hour specified by t, in the
 // range [0, 59].
 func (t TimeOfDay) Minute() int {
-	return int(t) % int(microsecondsPerHour) / int(microsecondsPerMinute)
+	return int(int64(t) % microsecondsPerHour / microsecondsPerMinute)
 }
 
 // Second returns the second offset within the minute specified by t, in the
 // range [0, 59].
 func (t TimeOfDay) Second() int {
-	return int(t) % int(microsecondsPerMinute) / int(microsecondsPerSecond)
+	return int(int64(t) % microsecondsPerMinute / microsecondsPerSecond)
 }
 
 // Microsecond returns the microsecond offset within the second specified by t,
